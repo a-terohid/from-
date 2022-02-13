@@ -1,4 +1,5 @@
 import React , { useEffect , useState } from 'react';
+import { Link } from 'react-router-dom';
 
 //VALIDATE  
 import { Validate } from "../validate/validate"
@@ -85,8 +86,8 @@ const Sign_In = () => {
                     { errors.password && tuch.password && <span>{ errors.password }</span> }
                 </div>
                 <div className={styles.formButtons}>
-                    <a href='#'>Sign In</a>
-                    <button type="submit">Login</button>
+                    <Link to="/Sign-Up" >Sign Up</Link>
+                    <button type="submit">Sign In</button>
                 </div>
            </form>
            <ToastContainer />

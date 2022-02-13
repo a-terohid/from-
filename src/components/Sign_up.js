@@ -1,4 +1,6 @@
 import React , { useEffect , useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 //VALIDATE  
 import { Validate } from "../validate/validate"
@@ -126,7 +128,7 @@ const Sign_up = () => {
                     { errors.isAccepted && tuch.isAccepted && <span>{ errors.isAccepted }</span> }
                 </div>
                 <div className={styles.formButtons}>
-                    <a href="#">Login</a>
+                    <Link to="/Sign-In" >Sign In</Link>
                    <button type="submit">Sign Up</button>
                 </div>
            </form>

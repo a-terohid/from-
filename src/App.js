@@ -1,4 +1,6 @@
+//COMPONNENTS
 import Sign_up from "./components/Sign_up";
+import Sign_In from "./components/Sign_In";
 
 function App() {
   return (

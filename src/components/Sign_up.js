@@ -1,5 +1,6 @@
 import React , { useEffect , useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 //VALIDATE  
@@ -49,8 +50,24 @@ const Sign_up = () => {
     const submitHandler = ( event ) => {
         event.preventDefault();
         if ( !Object.keys(errors).length ) {
-            console.log(data)
-            notify("succses")
+
+            const registerAPI = 'https://api.freerealapi.com/auth/register'
+            const headers = { 'Content-Type': 'application/json' }
+            const userData={
+                name: data.name ,
+                email: data.email ,
+                password: data.password ,
+            }
+
+            axios.post( registerAPI , userData , headers )
+            .then( response => tuastHandeler( response )) 
+            
+            const tuastHandeler = ( response ) => {
+                notify( response.data.success , response.data.message );
+            }
+            
+
+
         } else {
             setTuch ({
                 name: true,

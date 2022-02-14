@@ -1,5 +1,6 @@
 import React , { useEffect , useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from "axios"
 
 //VALIDATE  
 import { Validate } from "../validate/validate"
@@ -15,7 +16,7 @@ import styles from "./sign_up.module.scss"
 const Sign_In = () => {
 
 
-    //states
+    //STATES
     const [ data , setData] = useState({   
         password: "" ,
         email: "" ,
@@ -25,7 +26,7 @@ const Sign_In = () => {
     const [ tuch , setTuch ] = useState({})
     
 
-    //functions
+    //FUNCTOINS
     useEffect ( () => {
         setErrors( Validate( data , "login" ) )
     } , [ data , tuch ] )
@@ -46,8 +47,31 @@ const Sign_In = () => {
     const submitHandler = ( event ) => {
         event.preventDefault();
         if ( !Object.keys(errors).length ) {
-            console.log(data)
-            notify("succses")
+
+            const loginAPI = 'http://localhost:3300/auth/login'
+            const headers = { 'Content-Type': 'application/json' }
+            const userData={
+                email: data.email ,
+                password: data.password ,
+            }
+            
+        //     fetch('http://localhost:3300/auth/login', {
+        //     method: 'POST',
+        //     headers: headers,
+        //     body: JSON.stringify( userData )
+        // })
+        // .then((response) => response.json())
+        // .then((json) => console.log(json))
+
+        axios.post( loginAPI , userData , headers )
+        .then( response => tuastHandeler( response ))
+
+
+        const tuastHandeler = ( response ) => {
+            console.log(response.data)
+            notify( response.data.success , response.data.message );
+        } 
+            
         } else {
             setTuch ({
                 email: true,
